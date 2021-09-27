@@ -90,13 +90,11 @@ exports.signin = (req, res) => {
       const options = { expiresIn: 86400, issuer: "http://localhost:5000" };
       const secret = config.secret;
       const token = jwt.sign(payload, secret, options);
-      return res
-        .status(200)
-        .json({
-          status: "ok",
-          message: "otp Verified and User signin successful",
-          token,
-        });
+      return res.status(200).json({
+        status: "ok",
+        message: "otp Verified and User signin successful",
+        token,
+      });
     })
     .catch((err) => {
       res.status(500).send({ message: err.message });
@@ -127,12 +125,6 @@ exports.verifyOtp = (req, res, next) => {
             res.status(200).json({
               status: "ok",
               message: "Verification Complete",
-              data: {
-                fullname: user.fullname,
-                username: user.username,
-                email: user.email,
-                phone: user.phoneNumber,
-              },
             })
           );
       }
