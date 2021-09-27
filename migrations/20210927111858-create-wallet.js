@@ -1,0 +1,33 @@
+"use strict";
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable("Wallets", {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      accountNumber: {
+        type: Sequelize.INTEGER,
+      },
+      walletBalance: {
+        type: Sequelize.FLOAT,
+      },
+      walletStatus: {
+        type: Sequelize.BOOLEAN,
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+    });
+  },
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable("Wallets");
+  },
+};
