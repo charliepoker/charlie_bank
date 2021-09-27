@@ -7,23 +7,22 @@ var bcrypt = require("bcryptjs");
 exports.signup = (req, res) => {
   // Generate account No
   const accountNo = () => {
-    let num = "";
-    while (num.length < 10) {
-      num += Math.floor(Math.random() * 10);
-    }
-    return num;
+    const accountNo = (min, max) => {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min)) + min;
+    };
   };
-  const generateAccountNo = accountNo();
+
+  const generateAccountNo = accountNo(1000000000, 10000000000);
 
   //  Generate Otp
-  const generateOtp = () => {
-    let num = "";
-    while (num.length < 4) {
-      num += Math.floor(Math.random() * 4);
-    }
-    return num;
+  const generateOtp = (min, max) => {
+    min = Math.ceil(min);
+    max = Math.ceil(max);
+    return Math.floor(Math.random() * (max - min)) + min;
   };
-  const generateNewOtp = generateOtp();
+  const generateNewOtp = generateOtp(1000, 10000);
 
   // Save User to Database
   db.User.create({
@@ -90,13 +89,11 @@ exports.signin = (req, res) => {
       const options = { expiresIn: 86400, issuer: "http://localhost:5000" };
       const secret = config.secret;
       const token = jwt.sign(payload, secret, options);
-      return res
-        .status(200)
-        .json({
-          status: "ok",
-          message: "otp Verified and User signin successful",
-          token,
-        });
+      return res.status(200).json({
+        status: "ok",
+        message: "otp Verified and User signin successful",
+        token,
+      });
     })
     .catch((err) => {
       res.status(500).send({ message: err.message });
