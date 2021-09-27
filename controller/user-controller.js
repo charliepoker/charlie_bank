@@ -6,12 +6,10 @@ var bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
   // Generate account No
-  const accountNo = () => {
-    const accountNo = (min, max) => {
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min)) + min;
-    };
+  const accountNo = (min, max) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
   };
 
   const generateAccountNo = accountNo(1000000000, 10000000000);
