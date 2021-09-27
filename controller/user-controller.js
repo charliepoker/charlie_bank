@@ -132,12 +132,6 @@ exports.verifyOtp = (req, res, next) => {
             res.status(200).json({
               status: "ok",
               message: "Verification Complete",
-              data: {
-                fullname: user.fullname,
-                username: user.username,
-                email: user.email,
-                phone: user.phoneNumber,
-              },
             })
           );
       }
