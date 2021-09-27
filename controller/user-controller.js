@@ -43,6 +43,7 @@ exports.signup = (req, res) => {
           username: user.username,
           email: user.email,
           phone: user.phoneNumber,
+          accountNo: generateAccountNo,
         },
       });
     })
@@ -92,7 +93,14 @@ exports.signin = (req, res) => {
       return res.status(200).json({
         status: "ok",
         message: "otp Verified and User signin successful",
-        token,
+        data: {
+          fullname: user.fullname,
+          username: user.username,
+          email: user.email,
+          phone: user.phoneNumber,
+          accountNo: generateAccountNo,
+          accessToken: token,
+        },
       });
     })
     .catch((err) => {
