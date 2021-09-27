@@ -1,7 +1,5 @@
 const db = require("../models");
 
-
-
 exports.checkDuplicateUsernameOrEmail = (req, res, next) => {
   // Username
   db.User.findOne({
@@ -28,6 +26,20 @@ exports.checkDuplicateUsernameOrEmail = (req, res, next) => {
         });
         return;
       }
+
+      // Phone No
+      db.User.findOne({
+        where: {
+          email: req.body.phoneNumber,
+        },
+      }).then((user) => {
+        if (user) {
+          res.status(400).send({
+            message: "Failed! Phone Number is already in use!",
+          });
+          return;
+        }
+      });
 
       next();
     });
