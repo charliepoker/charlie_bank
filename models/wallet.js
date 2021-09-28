@@ -9,13 +9,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Wallet.belongsTo(models.User, {
+        as:'user',
+        foreignKey: "userId",
+        onDelete: "cascade",
+      });
     }
   }
   Wallet.init(
     {
-      accountNumber: {
-        type: DataTypes.INTEGER,
-      },
       walletBalance: {
         type: DataTypes.FLOAT,
       },

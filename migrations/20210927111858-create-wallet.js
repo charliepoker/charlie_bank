@@ -8,11 +8,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      accountNumber: {
-        type: Sequelize.INTEGER,
-      },
       walletBalance: {
         type: Sequelize.FLOAT,
+      },
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "User",
+          key: "id",
+        },
       },
       walletStatus: {
         type: Sequelize.BOOLEAN,
