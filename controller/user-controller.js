@@ -1,5 +1,6 @@
 const db = require("../models");
 const config = require("../config/auth.config");
+const wallet = require("../controller/wallet-controller");
 
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
