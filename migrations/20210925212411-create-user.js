@@ -24,10 +24,7 @@ module.exports = {
         type: Sequelize.BIGINT,
         unique: true,
       },
-      // walletId: {
-      //   type: DataTypes.INTEGER,
-      //   unique: true,
-      // },
+
       accountNumber: {
         type: Sequelize.BIGINT,
         unique: true,

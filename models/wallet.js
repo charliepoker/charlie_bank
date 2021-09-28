@@ -10,9 +10,13 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Wallet.belongsTo(models.User, {
-        as:'user',
+        as: "user",
         foreignKey: "userId",
         onDelete: "cascade",
+      });
+      Wallet.hasMany(models.Transaction, {
+        as: "transactions",
+        foreignKey: "walletId",
       });
     }
   }
