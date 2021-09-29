@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
       },
       transactionAmount: {
-        type: DataTypes.FLO,
+        type: DataTypes.FLOAT,
       },
       from_wallet: {
         type: DataTypes.INTEGER,

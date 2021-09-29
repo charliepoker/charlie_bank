@@ -81,9 +81,9 @@ exports.signin = (req, res) => {
         return res.status(401).send({ message: "otp is not verified" });
       }
     })
-    .then(() => {
+    .then((user) => {
       const payload = {
-        username: req.bodyusername,
+        username: req.body.username,
         password: req.body.password,
       };
       const options = { expiresIn: 86400, issuer: "http://localhost:5000" };
