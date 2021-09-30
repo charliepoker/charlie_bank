@@ -24,6 +24,7 @@ module.exports = {
         type: Sequelize.BIGINT,
         unique: true,
       },
+
       accountNumber: {
         type: Sequelize.BIGINT,
         unique: true,

@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -11,8 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.hasOne(models.Wallet, {
+        as: "wallets",
+        foreignKey: "userId",
+        onDelete: "cascade",
+      });
     }
-  };
+  }
+
   User.init(
     {
       fullname: {
@@ -32,10 +36,14 @@ module.exports = (sequelize, DataTypes) => {
         unique: true,
       },
       accountNumber: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         unique: true,
         allowNull: false,
       },
+      // walletId: {
+      //   type: DataTypes.INTEGER,
+      //   unique: true,
+      // },
       otp: {
         type: DataTypes.INTEGER,
         unique: true,

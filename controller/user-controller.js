@@ -1,17 +1,16 @@
 const db = require("../models");
 const config = require("../config/auth.config");
+const wallet = require("../controller/wallet-controller");
 
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
   // Generate account No
-  const accountNo = () => {
-    const accountNo = (min, max) => {
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min)) + min;
-    };
+  const accountNo = (min, max) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
   };
 
   const generateAccountNo = accountNo(1000000000, 10000000000);
@@ -82,9 +81,9 @@ exports.signin = (req, res) => {
         return res.status(401).send({ message: "otp is not verified" });
       }
     })
-    .then(() => {
+    .then((user) => {
       const payload = {
-        username: req.bodyusername,
+        username: req.body.username,
         password: req.body.password,
       };
       const options = { expiresIn: 86400, issuer: "http://localhost:5000" };
