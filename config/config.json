@@ -8,10 +8,10 @@
     "port": "8889"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": "baa4d420147384",
+    "password": "4c648396",
+    "database": "heroku_19930a2aa072699",
+    "host": "us-cdbr-east-04.cleardb.com",
     "dialect": "mysql"
   }
 }
