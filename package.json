@@ -20,7 +20,7 @@
     "mysql2": "^2.3.0",
     "sequelize": "^6.6.5"
   },
-  "engines":{
-    "node":"14.16.1"
+  "engines": {
+    "node": "14.16.1"
   }
 }
