@@ -15,15 +15,10 @@ app.use(express.json());
 const db = require("./models");
 
 // force: true will drop the table if it already exists
-if (app_env === "PRODUCTION") {
-  db.sequelize.sync({ force: false }).then(() => {
-    console.log("Drop and Resync Database with { force: false }");
-  });
-} else {
-  db.sequelize.sync({ force: true }).then(() => {
-    console.log("Drop and Resync Database with { force: true }");
-  });
-}
+
+db.sequelize.sync({ force: false }).then(() => {
+  console.log("Drop and Resync Database with { force: false }");
+});
 
 app.get("/", (req, res) => {
   res.send("Hello world");
