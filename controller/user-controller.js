@@ -80,8 +80,7 @@ exports.signin = (req, res) => {
       if (!verified) {
         return res.status(401).send({ message: "otp is not verified" });
       }
-    })
-    .then((user) => {
+
       const payload = {
         username: req.body.username,
         password: req.body.password,
@@ -91,14 +90,12 @@ exports.signin = (req, res) => {
       const token = jwt.sign(payload, secret, options);
       return res.status(200).json({
         status: "ok",
-        message: "otp Verified and User signin successful",
         data: {
           fullname: user.fullname,
           username: user.username,
           email: user.email,
           phone: user.phoneNumber,
-          accountNo: generateAccountNo,
-          accessToken: token,
+          accountNo: user.accountNo,
         },
       });
     })
