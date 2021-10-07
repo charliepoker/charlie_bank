@@ -14,10 +14,10 @@ module.exports = {
       walletId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: {
-          model: "Wallet",
-          key: "id",
-        },
+        // references: {
+        //   model: "Wallet",
+        //   key: "id",
+        // },
       },
       transactionAmount: {
         type: Sequelize.FLOAT,

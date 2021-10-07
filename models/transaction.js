@@ -10,8 +10,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Transaction.belongsTo(models.Wallet, {
-        as: "wallet",
-        foreignKey: "walletId",
+        // as: "wallet",
+        // foreignKey: "walletId",
+        onDelete: "cascade",
       });
     }
   }
@@ -20,9 +21,9 @@ module.exports = (sequelize, DataTypes) => {
       transactionId: {
         type: DataTypes.INTEGER,
       },
-      walletId: {
-        type: DataTypes.INTEGER,
-      },
+      // walletId: {
+      //   type: DataTypes.INTEGER,
+      // },
       transactionAmount: {
         type: DataTypes.FLOAT,
       },

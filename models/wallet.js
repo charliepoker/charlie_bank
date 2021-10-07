@@ -10,13 +10,12 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Wallet.belongsTo(models.User, {
-        as: "user",
         foreignKey: "userId",
         onDelete: "cascade",
       });
       Wallet.hasMany(models.Transaction, {
         as: "transactions",
-        foreignKey: "walletId",
+        // foreignKey: "UserId",
       });
     }
   }
@@ -25,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
       walletBalance: {
         type: DataTypes.FLOAT,
       },
+      userId: {
+        type: DataTypes.INTEGER,
+      },
+
       walletStatus: {
         type: DataTypes.BOOLEAN,
       },
@@ -32,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Wallet",
+      tableName: "wallets",
     }
   );
   return Wallet;

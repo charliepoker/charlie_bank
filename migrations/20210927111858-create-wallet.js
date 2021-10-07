@@ -1,23 +1,25 @@
 "use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("Wallets", {
+    await queryInterface.createTable("wallets", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      walletBalance: {
-        type: Sequelize.FLOAT,
-      },
-      userId: {
+
+      UserId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: "User",
           key: "id",
+          as: "userId",
         },
+      },
+      walletBalance: {
+        type: Sequelize.FLOAT,
       },
       walletStatus: {
         type: Sequelize.BOOLEAN,

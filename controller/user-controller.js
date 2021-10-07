@@ -1,6 +1,6 @@
 const db = require("../models");
 const config = require("../config/auth.config");
-const wallet = require("../controller/wallet-controller");
+const wallet = require("../controller/wallet-controller.js");
 
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
@@ -32,6 +32,7 @@ exports.signup = (req, res) => {
     accountNumber: generateAccountNo,
     phoneNumber: req.body.phoneNumber,
     otp: generateNewOtp,
+    wallet: wallet.createWallet(),
   })
     .then((user) => {
       res.status(201).json({

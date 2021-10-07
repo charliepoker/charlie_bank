@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       User.hasOne(models.Wallet, {
         as: "wallets",
-        foreignKey: "userId",
         onDelete: "cascade",
+        // foreignKey: "userId",
       });
     }
   }
@@ -58,6 +58,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "User",
+      tableName: "users"
     }
   );
   return User;
