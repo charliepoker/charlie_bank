@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("Users", {
+    await queryInterface.createTable("users", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -24,6 +24,7 @@ module.exports = {
         type: Sequelize.BIGINT,
         unique: true,
       },
+
       accountNumber: {
         type: Sequelize.BIGINT,
         unique: true,

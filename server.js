@@ -14,8 +14,8 @@ app.use(express.json());
 const db = require("./models");
 
 // force: true will drop the table if it already exists
-db.sequelize.sync({ force: false }).then(() => {
-  console.log("Drop and Resync Database with { force: true }");
+db.sequelize.sync({ force: true }).then(() => {
+  console.log(`Drop and Resync Database with { force: true }`);
 });
 
 app.get("/", (req, res) => {
@@ -25,7 +25,6 @@ app.get("/", (req, res) => {
 // app.use("/api", require("./routes/user-route.js"));
 // routes
 require("./routes/user-route")(app);
-
 
 // set port, listen for requests
 const PORT = process.env.PORT || 5000;

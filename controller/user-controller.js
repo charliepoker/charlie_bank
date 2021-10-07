@@ -1,17 +1,16 @@
 const db = require("../models");
 const config = require("../config/auth.config");
+const wallet = require("../controller/wallet-controller.js");
 
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
   // Generate account No
-  const accountNo = () => {
-    const accountNo = (min, max) => {
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min)) + min;
-    };
+  const accountNo = (min, max) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
   };
 
   const generateAccountNo = accountNo(1000000000, 10000000000);
@@ -33,6 +32,7 @@ exports.signup = (req, res) => {
     accountNumber: generateAccountNo,
     phoneNumber: req.body.phoneNumber,
     otp: generateNewOtp,
+    wallet: wallet.createWallet(),
   })
     .then((user) => {
       res.status(201).json({
@@ -81,10 +81,9 @@ exports.signin = (req, res) => {
       if (!verified) {
         return res.status(401).send({ message: "otp is not verified" });
       }
-    })
-    .then(() => {
+
       const payload = {
-        username: req.bodyusername,
+        username: req.body.username,
         password: req.body.password,
       };
       const options = { expiresIn: 86400, issuer: "http://localhost:5000" };
@@ -92,14 +91,12 @@ exports.signin = (req, res) => {
       const token = jwt.sign(payload, secret, options);
       return res.status(200).json({
         status: "ok",
-        message: "otp Verified and User signin successful",
         data: {
           fullname: user.fullname,
           username: user.username,
           email: user.email,
           phone: user.phoneNumber,
-          accountNo: generateAccountNo,
-          accessToken: token,
+          accountNo: user.accountNo,
         },
       });
     })
